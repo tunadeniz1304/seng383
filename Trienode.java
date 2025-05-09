@@ -11,6 +11,7 @@ You ARE NOT ALLOWED to use any codes from somewhere else (e.g.,
 from the internet, other textbooks, other slides, etc.). You ARE NOT ALLOWED to use
 external libraries including the libraries given in the textbook.*/
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -90,17 +91,41 @@ public class Trienode {
 
     public List<String> getSuggestion(String word) {
         word = word.toLowerCase();
-        Node node =root;
+        Node node = root;
 
-        String prefix="";
+        String prefix = "";
 
-        for(int i=0;i<word.length();++i){
+        for (int i = 0; i < word.length(); ++i) {
             char c = word.charAt(i);
             int index = c;
-            if(node.next[index]==null) break;//devam etmiyorsa loop duruyor
-            else node =node.next[index];//devam ediyorsa sonraki nodea geciyor
-            prefix =prefix + c;
+            if (node.next[index] == null)
+                break;// devam etmiyorsa loop duruyor
+            else
+                node = node.next[index];// devam ediyorsa sonraki nodea geciyor
+            prefix = prefix + c;// gittigi yere kadar elimizde stringi tutuyor
 
         }
+        List<String> result = new ArrayList<>();
+
+        getWords(node, prefix, result);
+
+        return result;
+    }
+
+    public void getWords(Node n, String prefix, List<String> result) {
+
+        if (result.size() == 3)
+            return;// 3 tane oneri varsa yeterli
+        if (n.isWord)
+            result.add(prefix);// onerileri result listesine ekliyor
+
+        for (char c = 0; c < 256; c++) {// her ascii icin
+            if (n.next[c] != null) {// bu harfle devam eden yol var demek oluyor
+                String prefix2 = prefix + c;// yeni yoıl icin
+                getWords(n.next[c], prefix2, result);// recursive yaparak aynı
+            }
+
+        }
+
     }
 }
