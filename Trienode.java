@@ -44,11 +44,12 @@ class Main {
                 List<String> suggestions = trie.getSuggestion(newWord);
                 if (suggestions.isEmpty())
                     System.out.println("No Suggestions");
-                else
+                else {
                     System.out.print("Misspelled? ");
 
-                for (int i = 0; i < suggestions.size(); i++) {
-                    System.out.print(suggestions.get(i) + " ");
+                    for (int i = 0; i < suggestions.size(); i++) {
+                        System.out.print(suggestions.get(i) + " ");
+                    }
                 }
             }
 
