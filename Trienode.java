@@ -30,7 +30,6 @@ class Main {
         Trienode trie = new Trienode();
         for (String word : words) {
             trie.insertWord(word);
-
         }
 
         while (true) {
@@ -38,15 +37,21 @@ class Main {
             newWord = newWord.toLowerCase();
             if (newWord == "exit")
                 break;
-            if(trie.searchWord(newWord)==true){
+            if (trie.searchWord(newWord) == true) {
                 System.out.println("Correct Word");
             }
-            if(trie.searchWord(newWord)==false){
-            List<String> suggestions = trie.getSuggestion(newWord);
-            if(suggestions.isEmpty())System.out.println("No Suggestions");
-            
+            if (trie.searchWord(newWord) == false) {
+                List<String> suggestions = trie.getSuggestion(newWord);
+                if (suggestions.isEmpty())
+                    System.out.println("No Suggestions");
+                else
+                    System.out.print("Misspelled? ");
+
+                for (int i = 0; i < suggestions.size(); i++) {
+                    System.out.print(suggestions.get(i) + " ");
+                }
             }
-            
+
         }
 
     }
