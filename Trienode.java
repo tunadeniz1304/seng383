@@ -38,6 +38,15 @@ class Main {
             newWord = newWord.toLowerCase();
             if (newWord == "exit")
                 break;
+            if(trie.searchWord(newWord)==true){
+                System.out.println("Correct Word");
+            }
+            if(trie.searchWord(newWord)==false){
+            List<String> suggestions = trie.getSuggestion(newWord);
+            if(suggestions.isEmpty())System.out.println("No Suggestions");
+            
+            }
+            
         }
 
     }
