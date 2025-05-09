@@ -15,14 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Main {
 
-    public static void main(String[] args) {
 
+public class Trienode {
+        public static void main(String[] args) {
+System.out.println("Welcome to the Spell Checker!");
         Scanner input = new Scanner(System.in);
         String dictionary;
 
-        /* System.out.println("write down the words for dictionary."); */
+         System.out.println("write down the words for dictionary."); 
 
         dictionary = input.nextLine();
 
@@ -30,36 +31,35 @@ class Main {
         Trienode trie = new Trienode();
         for (String word : words) {
             trie.insertWord(word);
+            System.out.println("Inserted: " + word);// deneme
         }
 
         while (true) {
-            String newWord = input.nextLine();// kullanici kelime girerek test ediyor
-            newWord = newWord.toLowerCase();
+            String newWord = input.nextLine().toLowerCase();
+
             if (newWord.equals("exit"))
                 break;
-            if (trie.searchWord(newWord) == true) {
-                System.out.println("Correct Word");
-            }
-            if (trie.searchWord(newWord) == false) {
-                List<String> suggestions = trie.getSuggestion(newWord);
-                if (suggestions.isEmpty())
-                    System.out.println("No Suggestions");
-                else {
-                    System.out.print("Misspelled? ");
 
-                    for (int i = 0; i < suggestions.size(); i++) {
-                        System.out.print(suggestions.get(i) + " ");
+            boolean found = trie.searchWord(newWord);
+
+            if (found) {
+                System.out.println("Correct Word");
+            } else {
+                List<String> suggestions = trie.getSuggestion(newWord);
+
+                if (suggestions.isEmpty()) {
+                    System.out.println("No Suggestions");
+                } else {
+                    System.out.print("Misspelled? ");
+                    for (String s : suggestions) {
+                        System.out.print(s + " ");
                     }
+                    System.out.println(); // 🔥 BUNU ELSE İÇİNE ALDIK!
                 }
             }
-
         }
 
     }
-
-}
-
-public class Trienode {
     int R = 256;// ASCII
     Node root = new Node();
 
