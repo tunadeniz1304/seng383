@@ -35,7 +35,7 @@ class Main {
         while (true) {
             String newWord = input.nextLine();// kullanici kelime girerek test ediyor
             newWord = newWord.toLowerCase();
-            if (newWord == "exit")
+            if (newWord.equals("exit"))
                 break;
             if (trie.searchWord(newWord) == true) {
                 System.out.println("Correct Word");
